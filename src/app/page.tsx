@@ -1,9 +1,10 @@
-// Your Home component file (e.g., pages/index.js)
+// src/app/page.tsx
 
 import Section from "@/components/ui/Section";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import ContractCard from "@/components/ui/ContractCard";
+import ContractCard from "@/components/ui/ContractCard"; 
+import Image from 'next/image'; 
 
 // Data declarations (already moved outside of component scope or declared correctly)
 const teamMembers = [
@@ -79,20 +80,6 @@ export default function Home() {
     },
   ];
 
-  const expertiseContent = {
-    achievements: [
-      { title: "Inter-College <span class='text-[color:var(--accent)]'>Hackathon</span> Wins", details: "Secured top positions in regional and national coding/data science competitions." },
-      { title: "Published <span class='text-[color:var(--accent)]'>Case Studies</span>", details: "Our members regularly publish articles and case studies on platform like Medium and LinkedIn." },
-      { title: "In-House <span class='text-[color:var(--accent)]'>MLOps</span> Pipeline", details: "Developed and maintained a production-ready MLOps platform for departmental projects." },
-      { title: "Mentorship by <span class='text-[color:var(--accent)]'>Alumni</span>", details: "Active mentorship programs connecting students with experienced alumni in the AI industry." },
-    ],
-    skills: [
-      { title: "<span class='text-[color:var(--accent)]'>Machine</span> Learning", num: "01" },
-      { title: "<span class='text-[color:var(--accent)]'>Data</span> Visualization", num: "02" },
-      { title: "<span class='text-[color:var(--accent)]'>MLOps</span> & Deployment", num: "03" },
-      { title: "<span class='text-[color:var(--accent)]'>Research</span> & Innovation", num: "04" },
-    ]
-  };
 
   const eventTypes = [
     { type: "Workshops", description: "Hands-on sessions covering essential data science tools and techniques (e.g., Python for Data Science, Machine Learning Algorithms, Data Visualization with Power BI/Tableau, Deep Learning Frameworks)." },
@@ -220,7 +207,7 @@ export default function Home() {
               Our activities will be structured around three core pillars: <span className='text-[color:var(--accent)] font-medium'>Learning</span>, <span className='text-[color:var(--accent)] font-medium'>Application</span>, and <span className='text-[color:var(--accent)] font-medium'>Community</span>.
             </p>
 
-            {activityOutline.map((pillar, pillarIndex) => (
+            {activityOutline.map((pillar) => (
               <div key={pillar.id} className="pt-6 border-t border-white/[0.1]">
                 <h3 className="text-xl font-bold text-foreground mb-4">
                   {pillar.id}. <span className='text-[color:var(--accent)]'>{pillar.pillar.split(' ')[0]}</span> {pillar.pillar.substring(pillar.pillar.indexOf(' ') + 1)}
@@ -289,8 +276,8 @@ export default function Home() {
             <Card className="p-6 h-full flex flex-col justify-between" style={{ border: '1px solid var(--accent)' }}>
               <div className="mb-4">
                 <h4 className="text-xl font-bold text-[color:var(--accent)] mb-2">Our Motto</h4>
-                <div className="text-2xl font-bold tracking-tight text-foreground">"Innovate. Analyze. <span className='text-[color:var(--accent)]'>Lead.</span>"</div>
-                <p className="mt-2 text-sm text-muted">“WHERE <span className='text-[color:var(--accent)]'>IDEAS</span> MEET <span className='text-[color:var(--accent)]'>ACTION</span>”</p>
+                <div className="text-2xl font-bold tracking-tight text-foreground">&quot;Innovate. Analyze. <span className='text-[color:var(--accent)]'>Lead.</span>&quot;</div>
+                <p className="mt-2 text-sm text-muted">&ldquo;WHERE <span className='text-[color:var(--accent)]'>IDEAS</span> MEET <span className='text-[color:var(--accent)]'>ACTION</span>&rdquo;</p>
               </div>
               <p className="text-sm text-muted">
                 Our motto reflects our core values: to inspire innovative thinking, encourage rigorous data
@@ -303,9 +290,8 @@ export default function Home() {
 
       {/* EVENTS SECTION - Title reverted to string */}
       <Section title="Upcoming Events" subtitle="What's happening next">
-        <div id="events" className="grid lg:grid-cols-3 gap-6">
-          {/* Column 1: Event Agenda/Schedule */}
-          <Card className="p-6 lg:col-span-2">
+        <div id="events" className="grid lg:grid-cols-1 gap-6"> 
+          <Card className="p-6">
             <h3 className="text-lg font-semibold mb-4">Events We Will Be <span className='text-[color:var(--accent)]'>Conducting</span></h3>
             <p className="text-sm text-muted mb-6">
               The Data Science Society will organize a variety of events throughout the academic year to cater to different interests and skill levels.
@@ -321,93 +307,65 @@ export default function Home() {
             <p className="mt-6 text-xs text-muted">
               The Data Science Society will regularly update its event schedule and communicate details through official channels.
             </p>
-          </Card>
-
-          {/* Column 2: Next Event Card (Featured LivecodeX) - FIXED TITLE/SUBTITLE TO STRING */}
-          <div className="lg:col-span-1">
-            {/* Featured Card Design */}
-            <ContractCard
-              className="relative overflow-hidden p-6 shadow-xl h-full"
-              style={{
-                // Strong accent background for featured look
-                background: 'linear-gradient(140deg, color-mix(in oklab, var(--accent) 90%, #0a0a0a), #1a1a1a)',
-                border: '1px solid var(--accent)',
-                boxShadow: '0 0 20px 0 color-mix(in oklab, var(--accent) 50%, transparent)'
-              }}
-              // FIXED: Reverted to plain strings to avoid JSX errors in component props
-              title="LivecodeX" 
-              subtitle="24 Oct 2025 • CMRIT Hyderabad" 
-              footer={<Button asChild className="w-full bg-[#0a0a0a] text-white hover:bg-gray-800"><a href="/events">Register Now</a></Button>}
-            >
-              {/* Added a custom styled title inside the children to retain the look */}
-              <div className="mb-3">
-                <span className="text-white text-2xl font-bold">Livecode<span className='text-[#0a0a0a]'>X</span></span>
-              </div>
-              <div className="space-y-3 text-white">
-                <p className="text-sm text-white/90">Inter-college live coding competition with algorithmic challenges.</p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  <span className="rounded-full bg-white/[0.2] px-3 py-1 text-white">Teams of 1-2</span>
-                  <span className="rounded-full bg-white/[0.2] px-3 py-1 text-white">₹199 per team</span>
-                  <span className="rounded-full bg-white/[0.2] px-3 py-1 text-white">C/C++/Python/Java/JS</span>
-                </div>
-              </div>
-            </ContractCard>
-            {/* Re-adding View All Events button outside for clarity */}
-            <div className="mt-4 text-center">
+            <div className="mt-6 text-center">
                 <Button variant="outline" asChild className="w-full border-white/[0.3]"><a href="/events">View All Events</a></Button>
             </div>
-          </div>
+          </Card>
         </div>
       </Section>
 
-      {/* FINAL REDESIGNED TEAM SECTION: Static, 4-card grid, no bio, taller images, official-looking icons */}
+      {/* UPDATED TEAM SECTION: Uses the structure from the Team Page and Next.js Image */}
       <Section title="Meet the Team" subtitle="People behind the club">
         <div id="team" className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {teamMembers.slice(0, 4).map((member) => (
             <Card key={member.id} className="relative p-0 overflow-hidden">
-              {/* Image Section - Increased height to h-64 */}
-              <div className="relative h-64 w-full"> 
-                <img 
-                  src={member.imageUrl} 
-                  alt={member.name} 
-                  className="w-full h-full object-cover grayscale transition-opacity duration-300 hover:grayscale-0" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-              </div>
-              
-              {/* Info Section (Name, Role, Contact) */}
-              <div className="p-4 space-y-2">
-                  <h4 className="text-lg font-bold text-foreground">{member.name}</h4>
-                  <p className="text-sm text-[color:var(--accent)]">{member.title}</p>
-                  
-                  {/* Contact Links */}
-                  <div className="flex gap-3 pt-2">
-                    {/* LinkedIn Icon */}
-                    <a href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" 
-                       className="text-muted hover:text-[color:var(--accent)] transition-colors" 
-                       aria-label={`LinkedIn profile for ${member.name}`}>
-                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-5 h-5 fill-current">
-                        <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.3 38.5-38.5 38.5zm282.7 243h-66.4V297.8c0-26.1-23.4-48.5-52.9-48.5-29.4 0-51.4 22.3-51.4 48.5V416h-66.4V202.2h66.3v26.7h.9c8.7-18.9 33.4-46.7 88.5-46.7 66.8 0 94.5 43.1 94.5 98.4V416z"/>
-                       </svg>
-                    </a>
-                    {/* Email Icon */}
-                    <a href={`mailto:${member.socials.email}`} 
-                       className="text-muted hover:text-[color:var(--accent)] transition-colors" 
-                       aria-label={`Email ${member.name}`}>
-                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current">
-                        <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.6 27.4 8.6 38.8 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V392c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 340.8c-20.9 15.7-47.5 15.7-68.4 0L0 176z"/>
-                       </svg>
-                    </a>
-                    {/* Twitter/X Icon */}
-                     <a href={member.socials.twitter} target="_blank" rel="noopener noreferrer" 
-                       className="text-muted hover:text-[color:var(--accent)] transition-colors" 
-                       aria-label={`X/Twitter profile for ${member.name}`}>
-                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current">
-                        <path d="M389.2 48h70.6L305.6 224.2 487 464H381.5L248.8 296.7 113.1 464H41.6L201.2 284.4 21.6 48H138.1L257.4 205.1 389.2 48zM364.4 421.8h39.7L132.3 90.8H88.3L364.4 421.8z"/>
-                       </svg>
-                    </a>
-                  </div>
-              </div>
+                {/* Image Section - Increased height to h-64 */}
+                <div className="relative h-64 w-full"> 
+                    {/* Replaced <img> with Next.js <Image /> component for performance */}
+                    <Image 
+                      src={member.imageUrl} 
+                      alt={member.name} 
+                      fill // Use fill for dynamic sizes defined by the parent div
+                      style={{ objectFit: 'cover' }} 
+                      className="grayscale transition-opacity duration-300 hover:grayscale-0"
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+                </div>
+                
+                {/* Info Section (Name, Role, Contact) - Now uses the full TeamCard structure */}
+                <div className="p-4 space-y-2">
+                    <h4 className="text-lg font-bold text-foreground">{member.name}</h4>
+                    <p className="text-sm text-[color:var(--accent)]">{member.title}</p>
+                    
+                    {/* Contact Links */}
+                    <div className="flex gap-3 pt-2">
+                        {/* LinkedIn Icon */}
+                        <a href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" 
+                           className="text-muted hover:text-[color:var(--accent)] transition-colors" 
+                           aria-label={`LinkedIn profile for ${member.name}`}>
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-5 h-5 fill-current">
+                            <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.3 38.5-38.5 38.5zm282.7 243h-66.4V297.8c0-26.1-23.4-48.5-52.9-48.5-29.4 0-51.4 22.3-51.4 48.5V416h-66.4V202.2h66.3v26.7h.9c8.7-18.9 33.4-46.7 88.5-46.7 66.8 0 94.5 43.1 94.5 98.4V416z"/>
+                           </svg>
+                        </a>
+                        {/* Email Icon */}
+                        <a href={`mailto:${member.socials.email}`} 
+                           className="text-muted hover:text-[color:var(--accent)] transition-colors" 
+                           aria-label={`Email ${member.name}`}>
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current">
+                            <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.6 27.4 8.6 38.8 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V392c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 340.8c-20.9 15.7-47.5 15.7-68.4 0L0 176z"/>
+                           </svg>
+                        </a>
+                        {/* Twitter/X Icon */}
+                         <a href={member.socials.twitter} target="_blank" rel="noopener noreferrer" 
+                           className="text-muted hover:text-[color:var(--accent)] transition-colors" 
+                           aria-label={`X/Twitter profile for ${member.name}`}>
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current">
+                            <path d="M389.2 48h70.6L305.6 224.2 487 464H381.5L248.8 296.7 113.1 464H41.6L201.2 284.4 21.6 48H138.1L257.4 205.1 389.2 48zM364.4 421.8h39.7L132.3 90.8H88.3L364.4 421.8z"/>
+                           </svg>
+                        </a>
+                    </div>
+                </div>
             </Card>
           ))}
         </div>
